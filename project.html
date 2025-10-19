@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+</head>
+<body>
+
+    <main>
+        
+        <div id="tray">
+
+            <section class="module" id="primaryModule">
+
+                <!--Timer-tray functionality-->
+                <div class="timer-tray">
+
+                    <h2 class="hours timer"></h2>
+                    <input type="number" min="0" max="24" class="hours-input timer-input timer">
+
+                    <h2 class="timer colenA">:</h2> <!--:-->
+
+                    <h2 class="minutes timer"></h2>
+                    <input type="number" min="0" max="60" class="minutes-input timer-input timer">
+
+                    <h2 class="timer colenB">:</h2> <!--:-->
+
+                    <h2 class="seconds timer"></h2>
+                    <input min="0" max="60" type="number" class="seconds-input timer-input timer">
+
+
+                    <!--Play and Pause button-->
+                    <div class="play-pause">
+
+                        <i class="fa-solid fa-play pause"></i>  <!--Triangle-->
+                        <i class="fa-solid fa-pause play"></i>  <!--Two paralel lines-->
+
+                    </div>
+
+                </div>
+
+                <!--THREE_DOTS-->
+                <button class="three-dots"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                <!--..........-->
+
+                <!-- DIALOG_BOX -->
+                 <dialog  class="dialog-box">
+                    <form method="dialog">
+                        <button class="delete-btn">DELETE</button>
+                    </form>
+                 </dialog>
+                <!--............-->
+
+                <!--HEADING_INPUT_/_DISPLAY-->
+                <input type="text" class="heading-input" placeholder="Enter Heading (25 chars max)" maxlength="25">
+                
+                <h2 class="heading">Heading</h2>
+                <!--............-->
+
+                <textarea class="message" placeholder="Type Your message here" spellcheck="false"></textarea>
+
+            </section>
+
+            <button id="add-module"><i  class="fa-regular fa-plus fa-3x"></i></button>
+
+        </div>
+
+    </main>
+
+    <script type="module" src="project.js"></script>
+    <script type="module" src="object.js"></script>
+    <script type="module" src="moduleData.js"></script>
+</body>
+</html>
+
+
