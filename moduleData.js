@@ -44,37 +44,6 @@ export function updateModuleObjectTime(id, hour, minute, seconds ) {
 }
 
 
-//function to Update the DOM of each module
-
-setInterval( () =>{
-
-     
-for (let [key, value] of moduleDataMap) {
-
-    if(value.isPaused){
-        console.log("continued");
-        continue;
-    }
-
-    let hours = +value.hours;
-    let minutes = +value.minutes;
-    let seconds = +value.seconds;
-
-    console.log("calculated");
-    let totalTime = ((hours*3600) + (minutes*60) + seconds);
-
-    console.log("before", totalTime);
-    totalTime -= totalTime === 0 ? totalTime : 1;
-
-    console.log("after", totalTime);
-
-    let time = formatInHoursMinutesSeconds(totalTime);
-    updateModuleObjectTime(key, time.hours, time.minutes, time.seconds);
-    updateTimerHeadings(key, time.hours, time.minutes, time.seconds);
-
-
-
+export function sendNotification(heading = "Heading", message="Timer completed"){
+    new Notification(heading, {body: message});
 }
-
-}, 1000);
-

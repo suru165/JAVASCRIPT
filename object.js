@@ -8,15 +8,13 @@ export class modules{
     constructor(){
         modules.count++;
         this.hours = 0;
-        this.minutes = 0;
+        this.minutes = 0; 
         this.seconds = 0;
         this.id = modules.count;
         this.isThreeDotOn = false; // to check if three dot btn is clicked or not
         this.isPaused = true;
         this.isEnded = false;
 
-        this.message = document.querySelector(".message").value;
-        this.heading;
         let moduleReff = this.createNewModule();
         this.setIDs(moduleReff);
         

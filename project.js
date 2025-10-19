@@ -1,6 +1,7 @@
 "use strict";
 
-import { moduleDataMap } from "./moduleData.js";
+
+import { moduleDataMap, updateTimerHeadings, updateModuleObjectTime, sendNotification, formatInHoursMinutesSeconds} from "./moduleData.js";
 import { modules } from "./object.js";
 
 let module = document.querySelector(".module");
@@ -10,6 +11,11 @@ let addModuleBtn = document.querySelector("#add-module");
 
 //functionality of add button , using module objects
 addModuleBtn.onclick = () => {
+
+    if(Notification.permission === "default"){
+        Notification.requestPermission();
+    }
+
     let dummyModule = new modules();
     let id = dummyModule.id;
     moduleDataMap.set(id, dummyModule);
@@ -55,10 +61,12 @@ document.addEventListener("keydown", (e) => {
 
     if(e.key === "Enter" && e.target.classList.contains("heading-input")){
         let idNum = e.target.id.match(/\d+/);
+        let module = document.querySelector(`#module${idNum[0]}`);
         let heading = document.querySelector(`#heading${idNum[0]}`);
         let headingInput = document.querySelector(`#heading-input${idNum[0]}`);
         let userInput = headingInput.value || heading.textContent;
 
+        module.moduleData.heading = userInput;
         heading.textContent = userInput;
         headingInput.style.display = "none";
     }
@@ -69,7 +77,6 @@ tray.addEventListener("click", (e) => {
     if(e.target.classList.contains("delete-btn")){
         let idNum = e.target.id.match(/\d+/);
         let module = document.querySelector(`#module${idNum[0]}`);
-        console.log(tray);
         module.remove();
         moduleDataMap.delete(+idNum[0]);
     }
@@ -179,6 +186,53 @@ document.addEventListener( "click" ,(e) => {
 
 // Interval for timers Calculation
 
+
+//function to Update the DOM of each module
+
+setInterval( () =>{
+
+     
+for (let [key, value] of moduleDataMap) {
+
+    if(value.isPaused){         //If module paused,             
+        continue;               // no data modification in moduleData
+    }                     
+
+    let hours = +value.hours;           //extarcting Hours,
+    let minutes = +value.minutes;       // Minutes and
+    let seconds = +value.seconds;       // Seconds to calculate total time!
+
+    let totalTime = ((hours*3600) + (minutes*60) + seconds);   //Total time in seconds
+
+    if(totalTime === 0){    
+
+        let message = document.querySelector(`#message${key}`).value || "Timer over";
+        let heading = document.querySelector(`#heading${key}`).textContent || "Heading";
+        sendNotification(heading, message);
+        
+                                                        
+                                                            //If module is running without 
+        moduleDataMap.delete(+key)                          //setting time then delete
+        document.querySelector(`#module${key}`).remove();   //the module
+        
+
+        continue;
+    }
+
+    totalTime -= totalTime === 0 ? totalTime : 1;       //Prevent the timer from going Negative
+
+    //Function, formating TotalTime back to 
+    //hours, minutes and seconds
+    let time = formatInHoursMinutesSeconds(totalTime);       
+
+    updateModuleObjectTime(key, time.hours, time.minutes, time.seconds); 
+    updateTimerHeadings(key, time.hours, time.minutes, time.seconds);
+
+
+
+}
+
+}, 1000);
 
 
 
