@@ -1,5 +1,9 @@
 "use strict";
 
+//This file determines the functioning of the modules and 
+//handles input/output
+//Event etc
+
 
 import { moduleDataMap, updateTimerHeadings, updateModuleObjectTime, sendNotification, formatInHoursMinutesSeconds} from "./moduleData.js";
 import { modules } from "./object.js";
