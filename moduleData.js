@@ -45,5 +45,12 @@ export function updateModuleObjectTime(id, hour, minute, seconds ) {
 
 
 export function sendNotification(heading = "Heading", message="Timer completed"){
+
+    console.log("running");
+    
+    if(Notification.permission === "default"){
+        Notification.requestPermission();
+    }
+
     new Notification(heading, {body: message});
 }

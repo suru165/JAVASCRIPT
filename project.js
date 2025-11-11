@@ -212,6 +212,7 @@ for (let [key, value] of moduleDataMap) {
 
         let message = document.querySelector(`#message${key}`).value || "Timer over";
         let heading = document.querySelector(`#heading${key}`).textContent || "Heading";
+        
         sendNotification(heading, message);
         
                                                         
